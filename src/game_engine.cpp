@@ -1,5 +1,7 @@
 #include <iostream>
 #include "game_engine.h"
+#include "planetfactory.h"
+#include "planet.h"
 
 GameEngine::GameEngine()
 {
@@ -9,6 +11,15 @@ GameEngine::GameEngine()
     std::cout << "Exit:"<< exit << std::endl;
     std::cout << "Cycle:"<< cycle  << std::endl;
     std::cout << "Constructing engine" << std::endl;
+
+}
+
+void GameEngine::initialize() {
+    std::cout << "Initializing" << std::endl;
+
+    PlanetFactory* planetFactory = new PlanetFactory();
+    Planet* planet = planetFactory->create();
+    std::cout << "Created Planet:" << planet->getName() << std::endl;
 
 }
 
@@ -22,6 +33,9 @@ void GameEngine::start() {
 void GameEngine::execute() {
     cycle = cycle + 1;
     std::cout << "Executing " << cycle << std::endl;
+    if (cycle == 200000) {
+        exit = true;
+    }
 
 }
 /*

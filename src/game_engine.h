@@ -1,6 +1,10 @@
+#ifndef SRC_GAME_ENGINE_H_
+#define SRC_GAME_ENGINE_H_
+
 class GameEngine {
  public:
     GameEngine();
+    void initialize();
     void start();
 
 //    void setExit(bool _exit);
@@ -17,3 +21,5 @@ class GameEngine {
     void execute();
     
 };
+
+#endif
