@@ -7,9 +7,9 @@ class Planet {
  public:
     Planet();
     
-    void execute();
-    void setName(char* _name);
-    char* getName();
+    void executeCycle();
+    void setName(std::string _name);
+    std::string getName();
 
 //    void setExit(bool _exit);
 //    bool getExit();
@@ -19,7 +19,7 @@ class Planet {
 //    
  protected:
  private:
-    char* name;
+    std::string name;
     int size;
     int cluster;
     

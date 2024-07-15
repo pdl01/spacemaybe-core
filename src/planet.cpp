@@ -4,20 +4,20 @@
 Planet::Planet()
 {
 
-    std::cout << "Constructing PlanetFacory" << std::endl;
+    std::cout << "Constructing Planet" << std::endl;
 
 
 }
 
 
-void Planet::execute() {
-
+void Planet::executeCycle() {
+    std::cout << "Executing cycle for planet:" << this->name << std::endl;    
 }
 
-void Planet::setName(char* _name) {
+void Planet::setName(std::string _name) {
     name = _name;
 }
 
-char* Planet::getName() {
+std::string Planet::getName() {
     return name;
 }

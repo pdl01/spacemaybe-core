@@ -1,5 +1,8 @@
 #ifndef SRC_GAME_ENGINE_H_
 #define SRC_GAME_ENGINE_H_
+#include <vector> 
+#include "planet.h"
+#include "game_state.h"
 
 class GameEngine {
  public:
@@ -16,9 +19,11 @@ class GameEngine {
  protected:
  private:
     bool exit;
-    int cycle;
+    //int cycle;
+    //std::vector<Planet*> planets;
+    void executeCycle();
+    GameState* gameState;
 
-    void execute();
     
 };
 

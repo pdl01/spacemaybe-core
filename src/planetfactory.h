@@ -8,6 +8,7 @@ class PlanetFactory {
     PlanetFactory();
     
     Planet* create();
+    Planet* create(int i);
     Planet createPlanetFromResource();
   
  protected:
