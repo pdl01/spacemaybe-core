@@ -2,6 +2,9 @@
 #define SRC_PLANET_H_
 
 #include <string>
+#include <vector> 
+
+#include "populationsection.h"
 
 class Planet {
  public:
@@ -11,19 +14,15 @@ class Planet {
     void setName(std::string _name);
     std::string getName();
 
-//    void setExit(bool _exit);
-//    bool getExit();
-    
-//    void stop();
-//void start();
-//    
+
  protected:
  private:
     std::string name;
     int size;
     int cluster;
     
-    
+    std::vector<PopulationSection*> populationSections;
+
 };
 
 #endif
