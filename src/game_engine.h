@@ -10,17 +10,10 @@ class GameEngine {
     void initialize();
     void start();
 
-//    void setExit(bool _exit);
-//    bool getExit();
-    
-//    void stop();
-//void start();
-//    
  protected:
  private:
     bool exit;
-    //int cycle;
-    //std::vector<Planet*> planets;
+
     void executeCycle();
     GameState* gameState;
 

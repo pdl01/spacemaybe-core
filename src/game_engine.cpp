@@ -3,6 +3,7 @@
 #include "planetfactory.h"
 #include "planet.h"
 #include "game_state.h"
+#include "technologyfactory.h"
 
 GameEngine::GameEngine()
 {
@@ -24,9 +25,11 @@ void GameEngine::initialize() {
     gameState->setCycle(0);
     std::vector<Planet*> planets;
 
-    PlanetFactory* planetFactory = new PlanetFactory();
+    PlanetFactory planetFactory;
+    TechnologyFactory technologyFactory;
     for (int i=0;i<numOfPlanets;i++) {
-        Planet* planet = planetFactory->create(i);
+        Planet* planet = planetFactory.create(i);
+        //create technology 
         std::cout << "Created Planet:" << planet->getName() << std::endl;
         planets.push_back(planet);
 
@@ -50,6 +53,7 @@ void GameEngine::start() {
     while (!exit) {
         executeCycle();
     }
+    delete (this->gameState);
 }
 
 void GameEngine::executeCycle() {
