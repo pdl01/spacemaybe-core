@@ -28,3 +28,10 @@ void GameState::setPlanets( std::vector<Planet*> _planets) {
 std::vector<Planet*> GameState::getPlanets() {
     return planets;
 }
+
+GameState* GameState::clone() {
+    GameState* gameState = new GameState();
+    gameState->setNumPlanets(numPlanets);
+    gameState->setCycle(cycle);
+    return gameState; 
+}

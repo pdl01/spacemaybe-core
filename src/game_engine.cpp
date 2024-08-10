@@ -4,6 +4,8 @@
 #include "planet.h"
 #include "game_state.h"
 #include "technologyfactory.h"
+#include "attributefactory.h"
+#include "populationsectionfactory.h"
 
 GameEngine::GameEngine()
 {
@@ -19,6 +21,7 @@ GameEngine::GameEngine()
 void GameEngine::initialize() {
     std::cout << "Initializing" << std::endl;
     int numOfPlanets = 50;
+    int numOfPopulatedPlanets = 1;
 
     gameState = new GameState();
     gameState->setNumPlanets(numOfPlanets);
@@ -26,14 +29,27 @@ void GameEngine::initialize() {
     std::vector<Planet*> planets;
 
     PlanetFactory planetFactory;
-    TechnologyFactory technologyFactory;
+
+    PopulationSectionFactory populationSectionFactory;
+
     for (int i=0;i<numOfPlanets;i++) {
         Planet* planet = planetFactory.create(i);
-        //create technology 
+
         std::cout << "Created Planet:" << planet->getName() << std::endl;
-        planets.push_back(planet);
+        //assign coordinates
+        planets.push_back(planet);\
+
+
+    
 
     }
+
+    for (int i=0;i<numOfPopulatedPlanets;i++) {
+        //randomly select a planet and add population sections to it
+        PopulationSection* pa = populationSectionFactory.create();
+
+    }
+    
 
     gameState->setPlanets(planets);
 
@@ -52,6 +68,9 @@ void GameEngine::start() {
     std::cout << "Starting" << std::endl;
     while (!exit) {
         executeCycle();
+        
+        //clone the game state and add to the vector
+        //  
     }
     delete (this->gameState);
 }
@@ -75,7 +94,7 @@ void GameEngine::executeCycle() {
 
 
     if (cycle == 50) {
-        exit = true;
+        //exit = true;
     }
 
 }

@@ -11,12 +11,17 @@ class PopulationSection {
     void setName(std::string _name);
     std::string getName();
     
+    void addTechnology(Technology* technology);
+    void addAttribute(Attribute* attribute);
 
+    std::vector<Technology*> getTechnologies();
+    std::vector<Attribute*> getAttributes();
 
  protected:
  private:
     std::string name;
-    
+    int turnEstablished;
+
     std::vector<Technology*> technologies;
     std::vector<Attribute*> attributes;
     

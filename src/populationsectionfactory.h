@@ -2,6 +2,8 @@
 #define SRC_POPULATIONSECTION_FACTORY_H_
 
 #include "populationsection.h"
+#include "attributefactory.h"
+#include "technologyfactory.h"
 
 class PopulationSectionFactory {
  public:
@@ -14,7 +16,8 @@ class PopulationSectionFactory {
  protected:
  private:
     
-    
+    TechnologyFactory technologyFactory;
+    AttributeFactory attributeFactory;
     
 };
 

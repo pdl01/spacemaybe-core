@@ -21,3 +21,8 @@ void Planet::setName(std::string _name) {
 std::string Planet::getName() {
     return name;
 }
+
+void Planet::addPopulationSection (PopulationSection* populationSection) {
+    populationSections.push_back(populationSection);
+}
+

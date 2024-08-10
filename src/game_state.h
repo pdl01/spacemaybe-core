@@ -15,6 +15,9 @@ class GameState {
 
     void setNumPlanets(int _numPlanets);
     int getNumPlanets();
+    GameState* clone();
+
+
 
  private:
     int cycle;

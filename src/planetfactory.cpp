@@ -1,5 +1,6 @@
 #include "planetfactory.h"
 #include <iostream>
+#include "populationsection.h"
 
 PlanetFactory::PlanetFactory()
 {
@@ -20,5 +21,9 @@ Planet* PlanetFactory::create(int i) {
     name.append("p");
     name.append(std::to_string(i));
     x->setName(name);
+
+    PopulationSection* populationSection = populationSectionFactory.create();
+    x->addPopulationSection(populationSection);
+
     return x;
 }

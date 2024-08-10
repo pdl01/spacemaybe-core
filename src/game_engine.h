@@ -9,7 +9,6 @@ class GameEngine {
     GameEngine();
     void initialize();
     void start();
-
  protected:
  private:
     bool exit;

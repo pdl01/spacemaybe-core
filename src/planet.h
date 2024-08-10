@@ -14,6 +14,7 @@ class Planet {
     void setName(std::string _name);
     std::string getName();
 
+   void addPopulationSection (PopulationSection* populationSection);
 
  protected:
  private:

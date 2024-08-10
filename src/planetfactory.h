@@ -2,6 +2,7 @@
 #define SRC_PLANET_FACTORY_H_
 
 #include "planet.h"
+#include "populationsectionfactory.h"
 
 class PlanetFactory {
  public:
@@ -14,7 +15,7 @@ class PlanetFactory {
  protected:
  private:
     
-    
+    PopulationSectionFactory populationSectionFactory;
     
 };
 
