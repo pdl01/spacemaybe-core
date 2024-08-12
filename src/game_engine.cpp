@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "game_engine.h"
 #include "planetfactory.h"
 #include "planet.h"
@@ -6,6 +8,7 @@
 #include "technologyfactory.h"
 #include "attributefactory.h"
 #include "populationsectionfactory.h"
+#include "coordinate.h"
 
 GameEngine::GameEngine()
 {
@@ -22,6 +25,8 @@ void GameEngine::initialize() {
     std::cout << "Initializing" << std::endl;
     int numOfPlanets = 50;
     int numOfPopulatedPlanets = 1;
+    int universeMaxUnitPerDimension = 14000;  //14000 in each direction
+    int minimumDistanceFromCenter = 2000; //minimum distance from [0,0,0]
 
     gameState = new GameState();
     gameState->setNumPlanets(numOfPlanets);
@@ -32,16 +37,36 @@ void GameEngine::initialize() {
 
     PopulationSectionFactory populationSectionFactory;
 
+  
+    std::srand(std::time(nullptr));
+
     for (int i=0;i<numOfPlanets;i++) {
         Planet* planet = planetFactory.create(i);
 
-        std::cout << "Created Planet:" << planet->getName() << std::endl;
         //assign coordinates
-        planets.push_back(planet);\
+        
 
+        //build random coordinate
+        //is coordinate already there
+        //is coordinate too close to other coordinates
+    //    int random_value = std::rand();
+    //    int range = universeMaxUnitPerDimension - minimumDistanceFromCenter + 1;
+    //    int num = random_value % range + minimumDistanceFromCenter;
+        int planet_x = this->buildPlanetCoordinateComponent(universeMaxUnitPerDimension,minimumDistanceFromCenter);
+        //randomly set to negative or positive
+        
+        int planet_y = this->buildPlanetCoordinateComponent(universeMaxUnitPerDimension,minimumDistanceFromCenter);
+        //randomly set to negative or positive
 
-    
+        int planet_z = this->buildPlanetCoordinateComponent(universeMaxUnitPerDimension,minimumDistanceFromCenter);
+        //randomly set to negative or positive
 
+        Coordinate planetCoordinate =  Coordinate(planet_x,planet_y,planet_z,"universe");
+        planet->setUniverseCoordinate(planetCoordinate);
+        
+        std::cout << "Created Planet:" << planet->getName() << "[x="<<planet_x << ",y="<< planet_y << ",z=" << planet_z << "]" << std::endl;
+
+        planets.push_back(planet);
     }
 
     for (int i=0;i<numOfPopulatedPlanets;i++) {
@@ -63,7 +88,16 @@ void GameEngine::initialize() {
     } 
 
 }
-
+int GameEngine::buildPlanetCoordinateComponent(int _universeMaxUnitPerDimension, int _minimumDistanceFromCenter) {
+    int random_value = std::rand();
+    int range = _universeMaxUnitPerDimension - _minimumDistanceFromCenter + 1;
+    int num = random_value % range + _minimumDistanceFromCenter;
+    int second_random_value = std::rand();
+    if (second_random_value % 2 == 0) {
+        num = num * -1;
+    }
+    return num;
+}
 void GameEngine::start() {
     std::cout << "Starting" << std::endl;
     while (!exit) {

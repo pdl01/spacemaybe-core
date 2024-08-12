@@ -26,3 +26,12 @@ void Planet::addPopulationSection (PopulationSection* populationSection) {
     populationSections.push_back(populationSection);
 }
 
+void Planet::setUniverseCoordinate(Coordinate _coordinate) {
+    universeCoordinate = _coordinate;
+}
+
+Coordinate Planet::getUniverseCoordinate() {
+    return universeCoordinate;
+}
+
+

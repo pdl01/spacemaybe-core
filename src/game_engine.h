@@ -15,7 +15,7 @@ class GameEngine {
 
     void executeCycle();
     GameState* gameState;
-
+    int buildPlanetCoordinateComponent(int _universeMaxUnitPerDimension, int _minimumDistanceFromCenter);
     
 };
 
