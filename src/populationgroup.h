@@ -1,13 +1,14 @@
-#ifndef SRC_POPULATION_SECTION_H_
-#define SRC_POPULATION_SECTION_H_
+#ifndef SRC_POPULATION_GROUP_H_
+#define SRC_POPULATION_GROUP_H_
 #include <vector> 
 #include <string>
 #include "technology.h"
 #include "attribute.h"
+#include "mission.h"
 
-class PopulationSection {
+class PopulationGroup {
  public:
-    PopulationSection();
+    PopulationGroup();
     void setName(std::string _name);
     std::string getName();
     
@@ -16,6 +17,7 @@ class PopulationSection {
 
     std::vector<Technology*> getTechnologies();
     std::vector<Attribute*> getAttributes();
+    
 
  protected:
  private:
@@ -24,7 +26,7 @@ class PopulationSection {
 
     std::vector<Technology*> technologies;
     std::vector<Attribute*> attributes;
-    
+    std::vector<Mission*> activeMissions;
     
 };
 

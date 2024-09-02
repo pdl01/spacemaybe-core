@@ -22,10 +22,6 @@ std::string Planet::getName() {
     return name;
 }
 
-void Planet::addPopulationSection (PopulationSection* populationSection) {
-    populationSections.push_back(populationSection);
-}
-
 void Planet::setUniverseCoordinate(Coordinate _coordinate) {
     universeCoordinate = _coordinate;
 }

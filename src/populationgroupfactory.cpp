@@ -1,9 +1,9 @@
-#include "populationsectionfactory.h"
-#include "populationsection.h"
+#include "populationgroupfactory.h"
+#include "populationgroup.h"
 
 #include <iostream>
 
-PopulationSectionFactory::PopulationSectionFactory()
+PopulationGroupFactory::PopulationGroupFactory()
 {
 
     std::cout << "Constructing PopulationSectionFactory" << std::endl;
@@ -11,13 +11,13 @@ PopulationSectionFactory::PopulationSectionFactory()
 
 }
 
-PopulationSection* PopulationSectionFactory::create() {
+PopulationGroup* PopulationGroupFactory::create() {
     return create(1);
 }
 
-PopulationSection* PopulationSectionFactory::create(int i) {
+PopulationGroup* PopulationGroupFactory::create(int i) {
     std::cout << "Creating PopulationSection" << std::endl;
-    PopulationSection* x = new PopulationSection();
+    PopulationGroup* x = new PopulationGroup();
     std::string name = "";
     name.append("ps");
     name.append(std::to_string(i));
@@ -28,7 +28,5 @@ PopulationSection* PopulationSectionFactory::create(int i) {
 
     Attribute* attribute = attributeFactory.create();
     x->addAttribute(attribute);
-
-    //build the attributes and technologies
     return x;
 }

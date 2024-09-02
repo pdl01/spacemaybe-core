@@ -7,7 +7,7 @@
 #include "game_state.h"
 #include "technologyfactory.h"
 #include "attributefactory.h"
-#include "populationsectionfactory.h"
+#include "populationgroupfactory.h"
 #include "coordinate.h"
 
 GameEngine::GameEngine()
@@ -35,7 +35,7 @@ void GameEngine::initialize() {
 
     PlanetFactory planetFactory;
 
-    PopulationSectionFactory populationSectionFactory;
+    PopulationGroupFactory populationGroupFactory;
 
   
     std::srand(std::time(nullptr));
@@ -71,8 +71,10 @@ void GameEngine::initialize() {
 
     for (int i=0;i<numOfPopulatedPlanets;i++) {
         //randomly select a planet and add population sections to it
-        PopulationSection* pa = populationSectionFactory.create();
-
+        PopulationGroup* pa = populationGroupFactory.create();
+        Planet* planet = planets.back();
+        planets.pop_back();
+        planets.push_back(planet);
     }
     
 
