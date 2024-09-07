@@ -1,5 +1,6 @@
 #include "planetfactory.h"
 #include <iostream>
+#include <vector>
 
 PlanetFactory::PlanetFactory()
 {
@@ -20,5 +21,19 @@ Planet* PlanetFactory::create(int i) {
     name.append("p");
     name.append(std::to_string(i));
     x->setName(name);
+    std::vector<PlanetaryGeoSection*> geoSections;
+    for (int i=0;i<numOfGeoSections;i++) {
+        PlanetaryGeoSection* geoSection = createPlanetaryGeoSection();
+        geoSections.push_back(geoSection);
+    }
+    x->setGeoSections(geoSections);
+    std::cout << "Completed Creating Planet" << std::endl;
+
     return x;
 }
+
+PlanetaryGeoSection* PlanetFactory::createPlanetaryGeoSection() {
+    PlanetaryGeoSection* pgs = new PlanetaryGeoSection();
+    return pgs;
+}
+

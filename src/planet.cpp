@@ -1,4 +1,6 @@
 #include "planet.h"
+#include "planetarygeosection.h"
+
 #include <iostream>
 
 Planet::Planet()
@@ -30,4 +32,9 @@ Coordinate Planet::getUniverseCoordinate() {
     return universeCoordinate;
 }
 
-
+void Planet::setGeoSections( std::vector<PlanetaryGeoSection*> _geoSections) {
+    geoSections = _geoSections;
+}
+std::vector<PlanetaryGeoSection*> Planet::getGeoSections() {
+    return geoSections;
+}

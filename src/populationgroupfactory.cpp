@@ -26,7 +26,7 @@ PopulationGroup* PopulationGroupFactory::create(int i) {
     Technology* technology = technologyFactory.create();
     x->addTechnology(technology);
 
-    Attribute* attribute = attributeFactory.create();
-    x->addAttribute(attribute);
+    //Attribute* attribute = attributeFactory.create();
+    //x->addAttribute(attribute);
     return x;
 }

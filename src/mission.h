@@ -1,8 +1,9 @@
 #ifndef SRC_MISSION_H_
 #define SRC_MISSION_H_
 #include <string>
+#include "abstractmission.h"
 
-class Mission {
+class Mission : public AbstractMission {
  public:
     Mission();
     void setName(std::string _name);
@@ -15,7 +16,8 @@ class Mission {
     int getWillCompleteOnCycle();
     bool isCompleted();
     bool isStarted();
-    
+   //virtual void executeNextCycle(int cycle) = 0;
+
  protected:
  private:
     std::string name;

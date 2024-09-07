@@ -2,6 +2,7 @@
 #define SRC_PLANET_FACTORY_H_
 
 #include "planet.h"
+#include "planetarygeosection.h"
 
 class PlanetFactory {
  public:
@@ -9,11 +10,12 @@ class PlanetFactory {
     
     Planet* create();
     Planet* create(int i);
-    Planet createPlanetFromResource();
-  
+    Planet* createPlanetFromResource();
+    PlanetaryGeoSection* createPlanetaryGeoSection();
+
  protected:
  private:
-    
+   int numOfGeoSections = 2000;
     
 };
 

@@ -17,6 +17,7 @@ Mission* MissionFactory::create()
 Mission* MissionFactory::create(int i)
 {
     std::cout << "Creating Mission" << std::endl;
+    /*
     Mission *x = new Mission();
     std::string name = "";
     name.append("a");
@@ -25,15 +26,20 @@ Mission* MissionFactory::create(int i)
     x->setStartedOnCycle(1);
     x->setWillCompleteOnCycle(-1);
     return x;
+    */
+   Mission* x;
+   return x;
 }
 
 Mission* MissionFactory::create(std::string _name, int startCycle, int willCompleteOnCycle)
 {
-    std::cout << "Creating Mission" << std::endl;
-    Mission *x = new Mission();
-    x->setName(_name);
-    x->setStartedOnCycle(startCycle);
-    x->setWillCompleteOnCycle(willCompleteOnCycle);
+    //std::cout << "Creating Mission" << std::endl;
+    //Mission *x = new Mission();
+    //x->setName(_name);
+    //x->setStartedOnCycle(startCycle);
+    //x->setWillCompleteOnCycle(willCompleteOnCycle);
+    //return x;
+    Mission *x;
     return x;
 }
 

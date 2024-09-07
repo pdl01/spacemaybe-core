@@ -1,6 +1,7 @@
 #ifndef SRC_POPULATION_GROUP_H_
 #define SRC_POPULATION_GROUP_H_
 #include <vector> 
+#include <map>
 #include <string>
 #include "technology.h"
 #include "attribute.h"
@@ -16,16 +17,20 @@ class PopulationGroup {
     void addAttribute(Attribute* attribute);
 
     std::vector<Technology*> getTechnologies();
-    std::vector<Attribute*> getAttributes();
+    std::map<std::string,Attribute> getAttributes();
     
+    void setAge(int _name);
+    int getAge();
+    void incrementAge();
 
  protected:
  private:
     std::string name;
     int turnEstablished;
+    int age;
 
     std::vector<Technology*> technologies;
-    std::vector<Attribute*> attributes;
+    std::map<std::string,Attribute> attributes;
     std::vector<Mission*> activeMissions;
     
 };

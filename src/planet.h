@@ -5,6 +5,7 @@
 #include <vector> 
 
 #include "coordinate.h"
+#include "planetarygeosection.h"
 
 class Planet {
  public:
@@ -18,13 +19,16 @@ class Planet {
     void setUniverseCoordinate(Coordinate _coordinate);
     Coordinate getUniverseCoordinate();
 
+    void setGeoSections( std::vector<PlanetaryGeoSection*> _geoSections);
+    std::vector<PlanetaryGeoSection*> getGeoSections();
+    
  protected:
  private:
     std::string name;
     int size;
     int cluster;
     Coordinate universeCoordinate;
-
+    std::vector<PlanetaryGeoSection*> geoSections;
 };
 
 #endif
