@@ -19,6 +19,9 @@ class PopulationGroup {
     std::vector<Technology*> getTechnologies();
     std::map<std::string,Attribute> getAttributes();
     
+   void setTurnEstablished(int _turnEstablished);
+   int getTurnEstablished();
+
     void setAge(int _name);
     int getAge();
     void incrementAge();

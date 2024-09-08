@@ -9,6 +9,7 @@
 #include "attributefactory.h"
 #include "populationgroupfactory.h"
 #include "coordinate.h"
+#include "incrementagemission.h"
 
 GameEngine::GameEngine()
 {
@@ -32,6 +33,8 @@ void GameEngine::initialize() {
     gameState->setNumPlanets(numOfPlanets);
     gameState->setCycle(0);
     std::vector<Planet*> planets;
+    std::vector<PopulationGroup*> populationGroups;
+    std::vector<Mission*> missions;
 
     PlanetFactory planetFactory;
 
@@ -72,13 +75,18 @@ void GameEngine::initialize() {
     for (int i=0;i<numOfPopulatedPlanets;i++) {
         //randomly select a planet and add population sections to it
         PopulationGroup* pa = populationGroupFactory.create();
-        Planet* planet = planets.back();
-        planets.pop_back();
-        planets.push_back(planet);
+        pa->setTurnEstablished(1);
+        
+        IncrementAgeMission* incrementAgeMission = new IncrementAgeMission(pa,1);
+        populationGroups.push_back(pa);
+        missions.push_back(incrementAgeMission);
+
     }
     
 
     gameState->setPlanets(planets);
+    gameState->setMissions(missions);
+    gameState->setPopulationGroups(populationGroups);
 
     for (auto i = gameState->getPlanets().begin(); i != gameState->getPlanets().end(); ++i)  {
         std::cout << *i << " "; 
@@ -115,15 +123,30 @@ void GameEngine::executeCycle() {
     int numOfPlanets = gameState->getNumPlanets();
     int cycle = gameState->getCycle();
     std::vector<Planet*> planets = gameState->getPlanets();
-
+    std::vector<Mission*> missions = gameState->getMissions();
+    std::vector<PopulationGroup*> populationGroups = gameState->getPopulationGroups();
     cycle = cycle + 1;
     std::cout << "Executing " << cycle << std::endl;
 
     for (int i = 0; i < numOfPlanets; i++) { 
         planets[i]->executeCycle();
         // displaying object data 
-        std::cout << planets[i]->getName() << std::endl;
+        //std::cout << planets[i]->getName() << std::endl;
     }
+
+    for (int i = 0; i < missions.size(); i++) { 
+        missions[i]->executeNextCycle(cycle);
+        // displaying object data 
+        std::cout << missions[i]->getName() << std::endl;
+    }
+
+    for (int i = 0; i < populationGroups.size(); i++) { 
+        // displaying object data 
+        std::cout << "GameEngine " << populationGroups[i]->getName() << " age:" <<  populationGroups[i]->getAge() << std::endl;
+
+    }
+
+
 
     gameState->setCycle(cycle);
     gameState->setPlanets(planets);

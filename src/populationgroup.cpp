@@ -47,3 +47,6 @@ void PopulationGroup::incrementAge()
 {
     age++;
 }
+
+   void PopulationGroup::setTurnEstablished(int _turnEstablished) {turnEstablished = _turnEstablished;}
+   int PopulationGroup::getTurnEstablished() { return turnEstablished;}
