@@ -7,6 +7,9 @@
 class PlanetaryGeoSection {
  public:
       PlanetaryGeoSection();
+      PopulationGroup* getOwner();
+      void setOwner(PopulationGroup* _owner);
+      
  protected:
  private:
     PopulationGroup* owner;

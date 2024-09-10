@@ -8,4 +8,12 @@ PlanetaryGeoSection::PlanetaryGeoSection()
 
 }
 
+PopulationGroup* PlanetaryGeoSection::getOwner() {
+    return owner;
+}
+
+void PlanetaryGeoSection::setOwner(PopulationGroup* _owner) {
+    owner = _owner;
+}
+
 

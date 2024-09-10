@@ -10,6 +10,7 @@
 #include "populationgroupfactory.h"
 #include "coordinate.h"
 #include "incrementagemission.h"
+#include "growpopulationonplanetmission.h"
 
 GameEngine::GameEngine()
 {
@@ -73,13 +74,18 @@ void GameEngine::initialize() {
     }
 
     for (int i=0;i<numOfPopulatedPlanets;i++) {
-        //randomly select a planet and add population sections to it
         PopulationGroup* pa = populationGroupFactory.create();
         pa->setTurnEstablished(1);
         
+        //TODO: randomly select a planet and add population sections to it
+        //get first planet
+
+
         IncrementAgeMission* incrementAgeMission = new IncrementAgeMission(pa,1);
+        GrowPopulationOnPlanetMission* growPopulationOnPlanetMission = new GrowPopulationOnPlanetMission(pa,planets.at(0),1);
         populationGroups.push_back(pa);
         missions.push_back(incrementAgeMission);
+        missions.push_back(growPopulationOnPlanetMission);
 
     }
     
