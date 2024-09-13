@@ -22,7 +22,7 @@ PopulationGroup* PopulationGroupFactory::create(int i) {
     name.append("ps");
     name.append(std::to_string(i));
     x->setName(name);
-
+    x->setAge(0);
     Technology* technology = technologyFactory.create();
     x->addTechnology(technology);
 

@@ -24,7 +24,7 @@ public:
    void setNumPlanets(int _numPlanets);
    int getNumPlanets();
    GameState *clone();
-
+   ~GameState();
 private:
    int cycle;
    int numPlanets;

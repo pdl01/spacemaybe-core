@@ -13,7 +13,7 @@ Planet::Planet()
 
 
 void Planet::executeCycle() {
-    std::cout << "Executing cycle for planet:" << this->name << std::endl;    
+    //std::cout << "Executing cycle for planet:" << this->name << std::endl;    
 }
 
 void Planet::setName(std::string _name) {

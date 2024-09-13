@@ -1,7 +1,7 @@
 #include "vgame.h"
 
 VGame::VGame()
-    : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayer()
+    : mWindow(sf::VideoMode(1024, 768), "SFML Application"), mPlayer()
 {
     mPlayer.setRadius(40.f);
     mPlayer.setPosition(100.f, 100.f);

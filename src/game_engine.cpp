@@ -94,14 +94,14 @@ void GameEngine::initialize() {
     gameState->setMissions(missions);
     gameState->setPopulationGroups(populationGroups);
 
-    for (auto i = gameState->getPlanets().begin(); i != gameState->getPlanets().end(); ++i)  {
-        std::cout << *i << " "; 
-    }
+    //for (auto i = gameState->getPlanets().begin(); i != gameState->getPlanets().end(); ++i)  {
+    //    std::cout << *i << " "; 
+    //}
 
-    for (int i = 0; i < gameState->getNumPlanets(); i++) { 
-        // displaying object data 
-        std::cout << gameState->getPlanets()[i]->getName() << std::endl;
-    } 
+    //for (int i = 0; i < gameState->getNumPlanets(); i++) { 
+    //    // displaying object data 
+    //    std::cout << gameState->getPlanets()[i]->getName() << std::endl;
+    //} 
 
 }
 int GameEngine::buildPlanetCoordinateComponent(int _universeMaxUnitPerDimension, int _minimumDistanceFromCenter) {
@@ -158,12 +158,14 @@ void GameEngine::executeCycle() {
     gameState->setPlanets(planets);
 
 
-    if (cycle == 50) {
-        //exit = true;
+    if (cycle == 5000) {
+        exit = true;
     }
 
 }
-
+GameEngine::~GameEngine() {
+    delete gameState;
+}
 /*
 void setExit(bool _exit)
 {

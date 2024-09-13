@@ -62,3 +62,18 @@ std::vector<Mission *> GameState::getMissions()
 {
     return missions;
 }
+
+GameState::~GameState() {
+    while(!missions.empty()) {
+        delete missions.back();
+        missions.pop_back();
+    }
+    while(!planets.empty()) {
+        delete planets.back();
+        planets.pop_back();
+    }
+    while(!populationGroups.empty()) {
+        delete populationGroups.back();
+        populationGroups.pop_back();
+    }
+}

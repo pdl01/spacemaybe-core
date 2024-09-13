@@ -38,7 +38,12 @@ src/technology.cpp
 src/technologyfactory.cpp
 src/technologyfactory.h
 src/technology.h
-#src/vgame.cpp
-#src/vgame.h
+src/vgame.cpp
+src/vgame.h
         )   
+
+find_package(SFML COMPONENTS system window graphics)
+
+target_link_libraries(spacemaybe PRIVATE sfml-system sfml-graphics sfml-window ) 
+#target_link_libraries(main PRIVATE sfml-graphics)
 #sfml is installed here /usr/lib/x86_64-linux-gnu
