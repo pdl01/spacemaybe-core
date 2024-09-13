@@ -64,6 +64,7 @@ std::vector<Mission *> GameState::getMissions()
 }
 
 GameState::~GameState() {
+    /*
     while(!missions.empty()) {
         delete missions.back();
         missions.pop_back();
@@ -76,4 +77,5 @@ GameState::~GameState() {
         delete populationGroups.back();
         populationGroups.pop_back();
     }
+    */
 }

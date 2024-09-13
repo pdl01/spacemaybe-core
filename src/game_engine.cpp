@@ -164,7 +164,9 @@ void GameEngine::executeCycle() {
 
 }
 GameEngine::~GameEngine() {
+    /*
     delete gameState;
+    */
 }
 /*
 void setExit(bool _exit)
