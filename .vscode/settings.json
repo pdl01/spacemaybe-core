@@ -46,6 +46,7 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "map": "cpp",
-        "ctime": "cpp"
+        "ctime": "cpp",
+        "stack": "cpp"
     }
 }

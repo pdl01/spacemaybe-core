@@ -13,6 +13,7 @@ VGame::VGame()
 VGame::VGame() {
     this->initVariables();
     this->initWindow();
+    this->initStateData();
 }
 void VGame::run()
 {
@@ -58,4 +59,17 @@ void VGame::initWindow() {
 			sf::Style::Titlebar | sf::Style::Close);
 
 			//this->gfxSettings.contextSettings); 
+}
+
+void VGame::initStateData()
+{
+	this->currentSessionData.window = this->mainWindow;
+	//this->stateData.gfxSettings = &this->gfxSettings;
+	//this->stateData.supportedKeys = &this->supportedKeys;
+	//this->stateData.states = &this->states;
+	//this->stateData.gridSize = this->gridSize;
+}
+
+VGame::~VGame() {
+    delete this->mainWindow;
 }
