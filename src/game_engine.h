@@ -2,7 +2,7 @@
 #define SRC_GAME_ENGINE_H_
 #include <vector> 
 #include "planet.h"
-#include "game_state.h"
+#include "game_objs.h"
 
 class GameEngine {
  public:
@@ -16,7 +16,7 @@ class GameEngine {
     bool exit;
 
     void executeCycle();
-    GameState* gameState;
+    GameObjs* gameObjs;
     int buildPlanetCoordinateComponent(int _universeMaxUnitPerDimension, int _minimumDistanceFromCenter);
     
 };

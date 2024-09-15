@@ -1,14 +1,14 @@
-#ifndef SRC_GAME_STATE_H_
-#define SRC_GAME_STATE_H_
+#ifndef SRC_GAME_OBJS_H_
+#define SRC_GAME_OBJS_H_
 #include <vector>
 #include "planet.h"
 #include "populationgroup.h"
 #include "mission.h"
 
-class GameState
+class GameObjs
 {
 public:
-   GameState();
+   GameObjs();
    void setPlanets(std::vector<Planet *> _planets);
    std::vector<Planet *> getPlanets();
 
@@ -23,8 +23,8 @@ public:
 
    void setNumPlanets(int _numPlanets);
    int getNumPlanets();
-   GameState *clone();
-   ~GameState();
+   GameObjs *clone();
+   ~GameObjs();
 private:
    int cycle;
    int numPlanets;

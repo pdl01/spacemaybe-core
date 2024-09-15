@@ -1,15 +1,27 @@
 #include "vgame.h"
+#include "game_engine.h"
 
+/*
 VGame::VGame()
-    : mWindow(sf::VideoMode(1024, 768), "SFML Application"), mPlayer()
+    : mainWindow(sf::VideoMode(1024, 768), "Space Maybe"), mPlayer()
 {
     mPlayer.setRadius(40.f);
     mPlayer.setPosition(100.f, 100.f);
     mPlayer.setFillColor(sf::Color::Cyan);
 }
+*/
+VGame::VGame() {
+    this->initVariables();
+    this->initWindow();
+}
 void VGame::run()
 {
-    while (mWindow.isOpen())
+
+    GameEngine game;
+    //game.initialize();
+    //game.start();
+
+    while (mainWindow->isOpen())
     {
         processEvents();
         update();
@@ -20,18 +32,30 @@ void VGame::run()
 void VGame::processEvents()
 {
     sf::Event event;
-    while (mWindow.pollEvent(event))
+    while (mainWindow->pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            mWindow.close();
+            mainWindow->close();
     }
 }
 
 void VGame::render()
 {
-    mWindow.clear();
-    mWindow.draw(mPlayer);
-    mWindow.display();
+    mainWindow->clear();
+    mainWindow->draw(mPlayer);
+    mainWindow->display();
 }
 
 void VGame::update() {}
+
+void VGame::initVariables() {
+    this->mainWindow = NULL;
+}
+void VGame::initWindow() {
+    this->mainWindow = new sf::RenderWindow(
+			sf::VideoMode(1024, 768),
+			"Space Maybe",
+			sf::Style::Titlebar | sf::Style::Close);
+
+			//this->gfxSettings.contextSettings); 
+}

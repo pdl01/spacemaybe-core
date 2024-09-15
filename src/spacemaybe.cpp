@@ -1,5 +1,4 @@
 #include <iostream>
-#include "game_engine.h"
 #include "vgame.h"
 
 int main()
@@ -12,7 +11,5 @@ int main()
     std::cout << "main starting" << std::endl;
 
 
-    GameEngine game;
-    game.initialize();
-    game.start();
+
 }

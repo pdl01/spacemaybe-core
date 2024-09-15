@@ -10,8 +10,8 @@ src/coordinate.cpp
 src/coordinate.h
 src/game_engine.cpp
 src/game_engine.h
-src/game_state.cpp
-src/game_state.h
+src/game_objs.cpp
+src/game_objs.h
 src/growpopulationonplanetmission.cpp
 src/growpopulationonplanetmission.h 
 src/incrementagemission.h

@@ -5,6 +5,9 @@ class VGame
 public:
     VGame();
     void run();
+protected:
+    void initWindow();
+    void initVariables();
 
 private:
     void processEvents();
@@ -12,6 +15,8 @@ private:
     void render();
 
 private:
-    sf::RenderWindow mWindow;
+    sf::RenderWindow *mainWindow;
     sf::CircleShape mPlayer;
+
+    
 };

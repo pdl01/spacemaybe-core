@@ -4,7 +4,7 @@
 #include "game_engine.h"
 #include "planetfactory.h"
 #include "planet.h"
-#include "game_state.h"
+#include "game_objs.h"
 #include "technologyfactory.h"
 #include "attributefactory.h"
 #include "populationgroupfactory.h"
@@ -30,9 +30,9 @@ void GameEngine::initialize() {
     int universeMaxUnitPerDimension = 14000;  //14000 in each direction
     int minimumDistanceFromCenter = 2000; //minimum distance from [0,0,0]
 
-    gameState = new GameState();
-    gameState->setNumPlanets(numOfPlanets);
-    gameState->setCycle(0);
+    gameObjs = new GameObjs();
+    gameObjs->setNumPlanets(numOfPlanets);
+    gameObjs->setCycle(0);
     std::vector<Planet*> planets;
     std::vector<PopulationGroup*> populationGroups;
     std::vector<Mission*> missions;
@@ -90,9 +90,9 @@ void GameEngine::initialize() {
     }
     
 
-    gameState->setPlanets(planets);
-    gameState->setMissions(missions);
-    gameState->setPopulationGroups(populationGroups);
+    gameObjs->setPlanets(planets);
+    gameObjs->setMissions(missions);
+    gameObjs->setPopulationGroups(populationGroups);
 
     //for (auto i = gameState->getPlanets().begin(); i != gameState->getPlanets().end(); ++i)  {
     //    std::cout << *i << " "; 
@@ -122,15 +122,15 @@ void GameEngine::start() {
         //clone the game state and add to the vector
         //  
     }
-    delete (this->gameState);
+    delete (this->gameObjs);
 }
 
 void GameEngine::executeCycle() {
-    int numOfPlanets = gameState->getNumPlanets();
-    int cycle = gameState->getCycle();
-    std::vector<Planet*> planets = gameState->getPlanets();
-    std::vector<Mission*> missions = gameState->getMissions();
-    std::vector<PopulationGroup*> populationGroups = gameState->getPopulationGroups();
+    int numOfPlanets = gameObjs->getNumPlanets();
+    int cycle = gameObjs->getCycle();
+    std::vector<Planet*> planets = gameObjs->getPlanets();
+    std::vector<Mission*> missions = gameObjs->getMissions();
+    std::vector<PopulationGroup*> populationGroups = gameObjs->getPopulationGroups();
     cycle = cycle + 1;
     std::cout << "Executing " << cycle << std::endl;
 
@@ -154,8 +154,8 @@ void GameEngine::executeCycle() {
 
 
 
-    gameState->setCycle(cycle);
-    gameState->setPlanets(planets);
+    gameObjs->setCycle(cycle);
+    gameObjs->setPlanets(planets);
 
 
     if (cycle == 5000) {
