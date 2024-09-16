@@ -12,6 +12,7 @@ protected:
     void initWindow();
     void initVariables();
     void initStateData();
+    void initStates();
 
 private:
     void processEvents();

@@ -1,5 +1,6 @@
 #include "vgame.h"
 #include "game_engine.h"
+#include "startscreen_state.h"
 
 /*
 VGame::VGame()
@@ -14,6 +15,7 @@ VGame::VGame() {
     this->initVariables();
     this->initWindow();
     this->initStateData();
+    this->initStates();
 }
 void VGame::run()
 {
@@ -39,15 +41,52 @@ void VGame::processEvents()
             mainWindow->close();
     }
 }
+void VGame::initStates()
+{
+	this->states.push(new StartScreenState(&this->currentSessionData,&this->states));
+}
 
 void VGame::render()
 {
-    mainWindow->clear();
-    mainWindow->draw(mPlayer);
-    mainWindow->display();
+    //mainWindow->clear();
+    //mainWindow->draw(mPlayer);
+    //mainWindow->display();
+
+	this->mainWindow->clear();
+
+	//Render items
+	if (!this->states.empty())
+		this->states.top()->render();
+
+	this->mainWindow->display();
+
 }
 
-void VGame::update() {}
+void VGame::update() {
+    //this->updateSFMLEvents();
+
+	if (!this->states.empty())
+	{
+		if (this->mainWindow->hasFocus())
+		{
+			this->states.top()->update(0);
+
+			//if (this->states.top()->getQuit())
+			//{
+			//	this->states.top()->endState();
+			//	delete this->states.top();
+			//	this->states.pop();
+			//}
+		}
+	}
+	//Application end
+	else
+	{
+		//this->endApplication();
+		//this->window->close();
+	}
+
+}
 
 void VGame::initVariables() {
     this->mainWindow = NULL;

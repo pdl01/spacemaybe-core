@@ -40,10 +40,14 @@ src/technologyfactory.h
 src/technology.h
 src/vgame.cpp
 src/vgame.h
-src/state.h
-src/state.cpp
 src/currentsessiondata.h
 src/currentsessiondata.cpp
+src/state.h
+src/state.cpp
+src/game_state.h
+src/game_state.cpp
+src/startscreen_state.h
+src/startscreen_state.cpp
         )   
 
 find_package(SFML COMPONENTS system window graphics)
