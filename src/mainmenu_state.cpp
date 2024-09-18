@@ -3,10 +3,18 @@
 
 #include <iostream>
 
-MainMenuState::MainMenuState(CurrentSessionData* currentSessionData,std::stack<State*>* _states) : State(currentSessionData,_states)
+MainMenuState::MainMenuState(CurrentSessionData* _currentSessionData,std::stack<State*>* _states) 
 {
 
     std::cout << "Constructing MainMenuState" << std::endl;
+    this->states = _states;
+    std::cout << "Constructing 2 MainMenuState" << std::endl;
+
+    this->currentSessionData = _currentSessionData;
+        std::cout << "Constructing 3 MainMenuState" << std::endl;
+
+    this->window = _currentSessionData->window;
+    std::cout << "Constructing 4 MainMenuState" << std::endl;
 
 }
 

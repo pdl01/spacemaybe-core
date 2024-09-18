@@ -9,7 +9,7 @@
 
 class State {
  public:
-    State(CurrentSessionData* currentSessionData,std::stack<State*>* _states);
+    State();
     virtual ~State();
            
     virtual void update(const float& dt) = 0;

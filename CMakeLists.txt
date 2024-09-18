@@ -48,6 +48,8 @@ src/game_state.h
 src/game_state.cpp
 src/startscreen_state.h
 src/startscreen_state.cpp
+src/mainmenu_state.h
+src/mainmenu_state.cpp
         )   
 
 find_package(SFML COMPONENTS system window graphics)
