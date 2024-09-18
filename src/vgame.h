@@ -1,3 +1,6 @@
+#ifndef SRC_VGAME_H_
+#define SRC_VGAME_H_
+
 #include <SFML/Graphics.hpp>
 #include <stack>
 #include "state.h"
@@ -8,6 +11,12 @@ public:
     VGame();
     void run();
     ~VGame();
+    void loadStartScreen();
+    void loadMainMenuScreen();
+    void loadGameScreen();
+    sf::RenderWindow* getMainWindow();
+    CurrentSessionData* getCurrentSessionData();
+
 protected:
     void initWindow();
     void initVariables();
@@ -20,8 +29,10 @@ private:
     void render();
 
 private:
-    sf::RenderWindow *mainWindow;
+    sf::RenderWindow* mainWindow;
     sf::CircleShape mPlayer;
     std::stack<State*> states;
-    CurrentSessionData currentSessionData;
+    CurrentSessionData* currentSessionData;
 };
+
+#endif

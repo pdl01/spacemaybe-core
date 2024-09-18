@@ -3,13 +3,14 @@
 
 #include <iostream>
 
-StartScreenState::StartScreenState(CurrentSessionData* _currentSessionData,std::stack<State*>* _states)
+StartScreenState::StartScreenState(VGame* _game)
 {
 
     std::cout << "Constructing StartScreenState" << std::endl;
-    this->states = _states;
-    this->currentSessionData = currentSessionData;
-    this->window = _currentSessionData->window;
+    this->vGame = _game;
+    //this->states = _states;
+    //this->currentSessionData = currentSessionData;
+    //this->window = _currentSessionData->window;
 
 }
 
@@ -25,7 +26,8 @@ void StartScreenState::updateInputs() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
         std::cout << "left mouse pressed StartScreenState" << std::endl;
         
-        this->states->push(new MainMenuState(this->currentSessionData,this->states));
+        //this->states->push(new MainMenuState(this->currentSessionData,this->states));
+        this->vGame->loadMainMenuScreen();
     }
 }
 
@@ -33,10 +35,12 @@ void StartScreenState::render(sf::RenderTarget* target)
 {
     std::cout << "Render 1 StartScreenState" << std::endl;
     this->mPlayer.setRadius(180.f);
+    std::cout << "Render 2 StartScreenState" << std::endl;
+
     this->mPlayer.setPosition(100.f, 100.f);
     this->mPlayer.setFillColor(sf::Color::Cyan);
-    this->window->draw(this->mPlayer);
-    std::cout << "Render 2 StartScreenState" << std::endl;
+    this->vGame->getMainWindow()->draw(this->mPlayer);
+    std::cout << "Render 3 StartScreenState" << std::endl;
 
 
 

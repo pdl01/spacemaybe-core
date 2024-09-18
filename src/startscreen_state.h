@@ -5,17 +5,18 @@
 #include <string>
 #include <vector> 
 #include "state.h"
+#include "vgame.h"
 
 class StartScreenState : public State {
  public:
-    StartScreenState(CurrentSessionData* currentSessionData,std::stack<State*>* _states);
+    StartScreenState(VGame* _game);
     ~StartScreenState();
     
     void update(const float& dt);
 	void render(sf::RenderTarget* target = NULL);
  private:
     sf::CircleShape mPlayer;
-
+    VGame* vGame;
     void updateInputs();
 };
 #endif

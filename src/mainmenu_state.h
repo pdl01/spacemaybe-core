@@ -5,15 +5,18 @@
 #include <string>
 #include <vector> 
 #include "state.h"
+#include "vgame.h"
 
 class MainMenuState : public State {
  public:
-    MainMenuState(CurrentSessionData* currentSessionData,std::stack<State*>* _states);
+    MainMenuState(VGame* _game);
     ~MainMenuState();
     
     void update(const float& dt);
 	void render(sf::RenderTarget* target = NULL);
  private:
     sf::CircleShape mPlayer;
+    VGame* vGame;
+
 };
 #endif

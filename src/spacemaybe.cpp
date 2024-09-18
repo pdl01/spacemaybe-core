@@ -3,12 +3,11 @@
 
 int main()
 {
-    std::cout << "vgame starting" << std::endl;
+    std::cout << "main starting" << std::endl;
 
     VGame vgame;
     vgame.run();
 
-    std::cout << "main starting" << std::endl;
 
 
 

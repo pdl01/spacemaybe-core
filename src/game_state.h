@@ -5,12 +5,16 @@
 #include <string>
 #include <vector> 
 #include "state.h"
+#include "vgame.h"
 
 class GameState : public State {
  public:
-    GameState(CurrentSessionData* currentSessionData,std::stack<State*>* _states);
+    GameState(VGame* _game);
 
     void update(const float& dt) = 0;
 	void render(sf::RenderTarget* target = NULL) = 0;
+private:
+    VGame* vGame;
+
 };
 #endif

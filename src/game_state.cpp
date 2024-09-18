@@ -3,13 +3,11 @@
 
 #include <iostream>
 
-GameState::GameState(CurrentSessionData* _currentSessionData,std::stack<State*>* _states) 
+GameState::GameState(VGame* _game) 
 {
 
     std::cout << "Constructing GameState" << std::endl;
-    this->states = _states;
-    this->currentSessionData = _currentSessionData;
-    this->window = _currentSessionData->window;
+    this->vGame = _game;
 }
 
 

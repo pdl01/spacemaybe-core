@@ -3,17 +3,18 @@
 
 #include <iostream>
 
-MainMenuState::MainMenuState(CurrentSessionData* _currentSessionData,std::stack<State*>* _states) 
+MainMenuState::MainMenuState(VGame* _game) 
 {
 
     std::cout << "Constructing MainMenuState" << std::endl;
-    this->states = _states;
+    this->vGame = _game;
+    //this->states = _states;
     std::cout << "Constructing 2 MainMenuState" << std::endl;
 
-    this->currentSessionData = _currentSessionData;
+    //this->currentSessionData = _currentSessionData;
         std::cout << "Constructing 3 MainMenuState" << std::endl;
 
-    this->window = _currentSessionData->window;
+    //this->window = _currentSessionData->window;
     std::cout << "Constructing 4 MainMenuState" << std::endl;
 
 }
@@ -32,7 +33,7 @@ void MainMenuState::render(sf::RenderTarget* target)
     this->mPlayer.setRadius(100.f);
     this->mPlayer.setPosition(500.f, 500.f);
     this->mPlayer.setFillColor(sf::Color::Red);
-    this->window->draw(this->mPlayer);
+    this->vGame->getMainWindow()->draw(this->mPlayer);
 
 
 
