@@ -10,11 +10,18 @@
 class GameState : public State {
  public:
     GameState(VGame* _game);
+    ~GameState();
 
-    void update(const float& dt) = 0;
-	void render(sf::RenderTarget* target = NULL) = 0;
+    void update(const float& dt);
+	void render(sf::RenderTarget* target = NULL);
 private:
     VGame* vGame;
-
+    sf::View view;
+    sf::FloatRect mWorldBounds;
+    sf::Texture texture;
+    sf::CircleShape top_right_icon;
+    sf::CircleShape bottom_right_icon;
+    sf::CircleShape top_left_icon;
+    sf::CircleShape bottom_left_icon;
 };
 #endif

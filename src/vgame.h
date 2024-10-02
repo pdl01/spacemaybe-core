@@ -5,6 +5,8 @@
 #include <stack>
 #include "state.h"
 #include "currentsessiondata.h"
+#include "game_engine.h"
+
 class VGame
 {
 public:
@@ -14,8 +16,11 @@ public:
     void loadStartScreen();
     void loadMainMenuScreen();
     void loadGameScreen();
+    void startNewGame();
+    void continueGame();
     sf::RenderWindow* getMainWindow();
     CurrentSessionData* getCurrentSessionData();
+    GameEngine* getGameEngine();
 
 protected:
     void initWindow();
@@ -33,6 +38,7 @@ private:
     sf::CircleShape mPlayer;
     std::stack<State*> states;
     CurrentSessionData* currentSessionData;
+    GameEngine* gameEngine;
 };
 
 #endif

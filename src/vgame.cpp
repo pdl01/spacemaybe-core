@@ -2,6 +2,7 @@
 #include "game_engine.h"
 #include "startscreen_state.h"
 #include "mainmenu_state.h"
+#include "game_state.h"
 #include <iostream>
 
 /*
@@ -25,7 +26,7 @@ void VGame::run()
 {
 	std::cout << "vgame run" << std::endl;
 
-    GameEngine game;
+    //GameEngine game;
     //game.initialize();
     //game.start();
 
@@ -106,7 +107,7 @@ void VGame::initWindow() {
     this->mainWindow = new sf::RenderWindow(
 			sf::VideoMode(1024, 768),
 			"Space Maybe",
-			sf::Style::Titlebar | sf::Style::Close);
+			sf::Style::Titlebar |  sf::Style::Resize | sf::Style::Close);
 
 			//this->gfxSettings.contextSettings); 
 }
@@ -133,7 +134,17 @@ void VGame::loadMainMenuScreen() {
 
 }
 void VGame::loadGameScreen() {
+	this->states.push(new GameState(this));
+}
+void VGame::startNewGame() {
+	this->gameEngine  = new GameEngine();
+	this->gameEngine->initialize();
+	this->loadGameScreen();
+	//this->states.push(new GameState(this));
+}
 
+void VGame::continueGame() {
+	//this->states.push(new GameState(this));
 }
 
 sf::RenderWindow* VGame::getMainWindow() {
@@ -144,6 +155,9 @@ CurrentSessionData* VGame::getCurrentSessionData() {
 	return this->currentSessionData;
 }
 
+GameEngine* VGame::getGameEngine() {
+	return this->gameEngine;
+}
 
 VGame::~VGame() {
     delete this->mainWindow;

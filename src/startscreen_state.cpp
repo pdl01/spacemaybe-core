@@ -18,13 +18,16 @@ StartScreenState::StartScreenState(VGame* _game)
 
 void StartScreenState::update(const float& dt)
 {
-    std::cout << "Update StartScreenState" << std::endl;
+    //std::cout << "Update StartScreenState" << std::endl;
     this->updateInputs();
 }
 
 void StartScreenState::updateInputs() {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        std::cout << "left mouse pressed StartScreenState" << std::endl;
+
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->mPlayer.getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*this->vGame->getMainWindow())))){
+        
+        //std::cout << "left mouse pressed StartScreenState" << std::endl;
         
         //this->states->push(new MainMenuState(this->currentSessionData,this->states));
         this->vGame->loadMainMenuScreen();
@@ -33,14 +36,14 @@ void StartScreenState::updateInputs() {
 
 void StartScreenState::render(sf::RenderTarget* target)
 {
-    std::cout << "Render 1 StartScreenState" << std::endl;
+    //std::cout << "Render 1 StartScreenState" << std::endl;
     this->mPlayer.setRadius(180.f);
-    std::cout << "Render 2 StartScreenState" << std::endl;
+    //std::cout << "Render 2 StartScreenState" << std::endl;
 
     this->mPlayer.setPosition(100.f, 100.f);
     this->mPlayer.setFillColor(sf::Color::Cyan);
     this->vGame->getMainWindow()->draw(this->mPlayer);
-    std::cout << "Render 3 StartScreenState" << std::endl;
+    //std::cout << "Render 3 StartScreenState" << std::endl;
 
 
 

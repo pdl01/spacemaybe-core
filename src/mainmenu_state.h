@@ -14,6 +14,10 @@ class MainMenuState : public State {
     
     void update(const float& dt);
 	void render(sf::RenderTarget* target = NULL);
+ 
+ protected:
+    void updateInputs();
+ 
  private:
     sf::CircleShape mPlayer;
     VGame* vGame;
