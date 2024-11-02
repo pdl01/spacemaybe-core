@@ -23,5 +23,7 @@ private:
     sf::CircleShape bottom_right_icon;
     sf::CircleShape top_left_icon;
     sf::CircleShape bottom_left_icon;
+    int gsCycle;
+    int incrementGECycleAfterGSCcycle;
 };
 #endif

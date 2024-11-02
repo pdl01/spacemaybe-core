@@ -11,11 +11,13 @@ class GameEngine {
     void start();
     ~GameEngine();
 
+    GameObjs* getGameObjs();
+    void executeCycle();
+
  protected:
  private:
     bool exit;
 
-    void executeCycle();
     GameObjs* gameObjs;
     int buildPlanetCoordinateComponent(int _universeMaxUnitPerDimension, int _minimumDistanceFromCenter);
     

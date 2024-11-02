@@ -183,3 +183,7 @@ void stop() {
     setExit(true);
 }
 */
+
+GameObjs* GameEngine::getGameObjs() {
+    return this->gameObjs;
+}

@@ -6,16 +6,38 @@
 GameState::GameState(VGame *_game)
 {
     std::cout << "Constructing GameState" << std::endl;
+    this->gsCycle = 0;
+    //will be set by game speed;
+    this->incrementGECycleAfterGSCcycle = 1000;
     this->vGame = _game;
 texture.loadFromFile("/home/phil/Documents/Projects/spacemaybe/code/spacemaybe/src/Resources/Images/Backgrounds/bg1.png");
    
+
+
+   //create a scenegraph;
+   //go through all planets and populate the scenenode 
+    GameEngine *gameEngine = this->vGame->getGameEngine();
+
+ //build a scene graph based on the current gameObjs;
+    for (auto i = gameEngine->getGameObjs()->getPlanets().begin(); i != gameEngine->getGameObjs()->getPlanets().end(); ++i)  {
+        //add the planet to the scene graph
+    }
+
 }
 
 void GameState::update(const float &dt)
 {    
-    std::cout << "GameState:Update" << std::endl;
+    //std::cout << "GameState:Update" << std::endl;
     GameEngine *gameEngine = this->vGame->getGameEngine();
+    if (this->gsCycle > this->incrementGECycleAfterGSCcycle) {
+        gameEngine->executeCycle();
+        this->gsCycle = 0;
 
+    } else {
+        this->gsCycle++;
+    }
+
+   
     this->top_left_icon.setRadius(20.f);
     this->top_left_icon.setPosition(0.f, 0.f);
     this->top_left_icon.setFillColor(sf::Color::Red);
@@ -36,7 +58,7 @@ void GameState::update(const float &dt)
 
 void GameState::render(sf::RenderTarget *target)
 {
-    std::cout << "GameState:Render" << std::endl;
+    //std::cout << "GameState:Render" << std::endl;
 
     this->view.reset(sf::FloatRect(0,0,2048,1400));
     this->mWorldBounds = sf::FloatRect(0.f,0.f,this->view.getSize().x,2000.f);
