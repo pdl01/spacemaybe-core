@@ -21,6 +21,8 @@ public:
     sf::RenderWindow* getMainWindow();
     CurrentSessionData* getCurrentSessionData();
     GameEngine* getGameEngine();
+    void finishGame();
+
 
 protected:
     void initWindow();

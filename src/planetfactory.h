@@ -11,7 +11,7 @@ class PlanetFactory {
     Planet* create();
     Planet* create(int i);
     Planet* createPlanetFromResource();
-    PlanetaryGeoSection* createPlanetaryGeoSection();
+    PlanetaryGeoSection* createPlanetaryGeoSection(int i);
 
  protected:
  private:

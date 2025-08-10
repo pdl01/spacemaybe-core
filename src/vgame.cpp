@@ -35,6 +35,9 @@ void VGame::run()
         processEvents();
         update();
         render();
+		if (this->gameEngine != NULL && this->gameEngine->shouldExit() == true) {
+			this->finishGame();
+		}
     }
 }
 
@@ -43,8 +46,11 @@ void VGame::processEvents()
     sf::Event event;
     while (mainWindow->pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
-            mainWindow->close();
+        if (event.type == sf::Event::Closed) {
+			
+			this->finishGame();
+            //mainWindow->close();
+		}
     }
 }
 void VGame::initStates()
@@ -128,6 +134,13 @@ void VGame::loadStartScreen() {
 	this->states.push(new StartScreenState(this));
 
 }
+
+void VGame::finishGame() {
+	std::cout << "Finishing... " << std::endl;
+
+	this->mainWindow->close();
+}
+
 
 void VGame::loadMainMenuScreen() {
 	this->states.push(new MainMenuState(this));

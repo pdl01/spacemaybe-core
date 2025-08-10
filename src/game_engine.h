@@ -13,7 +13,8 @@ class GameEngine {
 
     GameObjs* getGameObjs();
     void executeCycle();
-
+    bool shouldExit();
+    
  protected:
  private:
     bool exit;

@@ -7,13 +7,14 @@
 class PlanetaryGeoSection {
  public:
       PlanetaryGeoSection();
+      PlanetaryGeoSection(int geoSectionId);
       PopulationGroup* getOwner();
       void setOwner(PopulationGroup* _owner);
       
  protected:
  private:
     PopulationGroup* owner;
-    
+    int geoSectionId;
     
 };
 #endif

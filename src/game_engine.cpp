@@ -158,7 +158,7 @@ void GameEngine::executeCycle() {
     gameObjs->setPlanets(planets);
 
 
-    if (cycle == 5000) {
+    if (cycle == 450) {
         exit = true;
     }
 
@@ -173,12 +173,12 @@ void setExit(bool _exit)
 {
     //exit = _exit;
 }
-
-bool getExit()
+*/
+bool GameEngine::shouldExit()
 {
-    return false;
+    return exit;
 }
-
+/*
 void stop() {
     setExit(true);
 }

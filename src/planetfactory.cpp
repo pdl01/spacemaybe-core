@@ -23,7 +23,7 @@ Planet* PlanetFactory::create(int i) {
     x->setName(name);
     std::vector<PlanetaryGeoSection*> geoSections;
     for (int i=0;i<numOfGeoSections;i++) {
-        PlanetaryGeoSection* geoSection = createPlanetaryGeoSection();
+        PlanetaryGeoSection* geoSection = createPlanetaryGeoSection(i);
         geoSections.push_back(geoSection);
     }
     x->setGeoSections(geoSections);
@@ -32,8 +32,8 @@ Planet* PlanetFactory::create(int i) {
     return x;
 }
 
-PlanetaryGeoSection* PlanetFactory::createPlanetaryGeoSection() {
-    PlanetaryGeoSection* pgs = new PlanetaryGeoSection();
+PlanetaryGeoSection* PlanetFactory::createPlanetaryGeoSection(int i) {
+    PlanetaryGeoSection* pgs = new PlanetaryGeoSection(i);
     return pgs;
 }
 

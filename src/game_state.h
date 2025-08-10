@@ -16,7 +16,9 @@ class GameState : public State {
 	void render(sf::RenderTarget* target = NULL);
 private:
     VGame* vGame;
-    sf::View view;
+    sf::View mainView;
+    sf::View miniView;
+
     sf::FloatRect mWorldBounds;
     sf::Texture texture;
     sf::CircleShape top_right_icon;
