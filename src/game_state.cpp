@@ -1,5 +1,7 @@
 #include "game_state.h"
 #include "currentsessiondata.h"
+#include <SFML/Window/Mouse.hpp>
+
 
 #include <iostream>
 
@@ -54,6 +56,13 @@ void GameState::update(const float &dt)
     this->bottom_left_icon.setPosition(0.f, this->mainView.getSize().y-40.f);
     this->bottom_left_icon.setFillColor(sf::Color::Magenta);
     //create the four absoloute corners at the world boundries
+
+
+    
+
+    sf::Vector2i mousePos = sf::Mouse::getPosition();
+    sf::Vector2f mousePosF = this->vGame->getMainWindow()->mapPixelToCoords(mousePos);
+    std::cout << "x:" << mousePosF.x << "y:" << mousePosF.y << "\n";
 }
 
 void GameState::render(sf::RenderTarget *target)
@@ -95,6 +104,8 @@ void GameState::render(sf::RenderTarget *target)
     minibkg.setFillColor(sf::Color::Blue);
     minibkg.setPosition(0,0);
     minibkg.setSize(sf::Vector2f(100, 100));
+
+
     this->vGame->getMainWindow()->draw(minibkg);
     this->miniView.setViewport(sf::FloatRect(0.f, 0.75f, 0.25f, 0.25f));
     this->vGame->getMainWindow()->draw(this->top_left_icon);
