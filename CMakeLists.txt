@@ -15,7 +15,7 @@ src/game_objs.h
 src/growpopulationonplanetmission.cpp
 src/growpopulationonplanetmission.h 
 src/incrementagemission.h
-src/incrementagemisson.cpp
+src/incrementagemission.cpp
 src/mission.cpp
 src/missionfactory.cpp
 src/missionfactory.h
@@ -25,11 +25,8 @@ src/planetarygeosection.h
 src/planet.cpp
 src/planetfactory.cpp
 src/planetfactory.h
-src/planet.h
 src/populationgroup.cpp
-src/planetfactory.h
 src/planet.h
-src/populationgroup.cpp
 src/populationgroupfactory.cpp
 src/populationgroupfactory.h
 src/populationgroup.h
