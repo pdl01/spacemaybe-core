@@ -14,11 +14,22 @@ class GameState : public State {
 
     void update(const float& dt);
 	void render(sf::RenderTarget* target = NULL);
+    void renderControlView(sf::RenderWindow* win);
+    void renderInfoView(sf::RenderWindow* win);
+    void renderMainView(sf::RenderWindow* win);
+
+
 private:
     VGame* vGame;
     sf::View mainView;
-    sf::View miniView;
-
+    sf::View controlView;
+    sf::View infoView;
+    bool showPlanetNames;
+    bool fontLoaded;
+    bool wasMousePressed;
+    sf::Font font;
+    
+    
     sf::FloatRect mWorldBounds;
     sf::Texture texture;
     sf::CircleShape top_right_icon;

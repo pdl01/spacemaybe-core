@@ -25,6 +25,46 @@ GameState::GameState(VGame *_game)
         //add the planet to the scene graph
     }
 
+    // initialize views based on current window size
+    sf::RenderWindow* win = this->vGame->getMainWindow();
+    sf::Vector2u winSize = win->getSize();
+
+    // layout fractions
+    float infoWidthFrac = 0.22f;   // left column for information
+    float controlHeightFrac = 0.18f; // bottom row for controls
+
+    // main world view (center pane)
+    this->mainView.reset(sf::FloatRect(0.f, 0.f, 2048.f, 1400.f));
+    this->mainView.setViewport(sf::FloatRect(infoWidthFrac, 0.f, 1.f - infoWidthFrac, 1.f - controlHeightFrac));
+
+    // info view (left column)
+    this->infoView.reset(sf::FloatRect(0.f, 0.f, (float)winSize.x * infoWidthFrac, (float)winSize.y * (1.f - controlHeightFrac)));
+    this->infoView.setViewport(sf::FloatRect(0.f, 0.f, infoWidthFrac, 1.f - controlHeightFrac));
+
+    // control view (bottom row)
+    this->controlView.reset(sf::FloatRect(0.f, 0.f, (float)winSize.x, (float)winSize.y * controlHeightFrac));
+    this->controlView.setViewport(sf::FloatRect(0.f, 1.f - controlHeightFrac, 1.f, controlHeightFrac));
+
+    // init button state and font
+    this->showPlanetNames = false;
+    this->wasMousePressed = false;
+    this->fontLoaded = false;
+    // try bundled font paths first, then common system path
+    const char* tryPaths[] = {
+        "Resources/Fonts/DejaVuSans.ttf",
+        "src/Resources/Fonts/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        NULL
+    };
+    for (int p = 0; tryPaths[p] != NULL; ++p) {
+        const char* fp = tryPaths[p];
+        if (this->font.loadFromFile(fp)) {
+            this->fontLoaded = true;
+            std::cout << "Loaded font from: " << fp << std::endl;
+            break;
+        }
+    }
+
 }
 
 void GameState::update(const float &dt)
@@ -38,6 +78,8 @@ void GameState::update(const float &dt)
     } else {
         this->gsCycle++;
     }
+
+    // no demo counter when engine is inactive
 
    
     this->top_left_icon.setRadius(20.f);
@@ -60,57 +102,166 @@ void GameState::update(const float &dt)
 
     
 
-    sf::Vector2i mousePos = sf::Mouse::getPosition();
+    sf::RenderWindow* win = this->vGame->getMainWindow();
+    sf::Vector2i mousePos = sf::Mouse::getPosition(*win);
+    // detect clicks inside control view button area
+    sf::Vector2u winSize = win->getSize();
+    float controlHeightFrac = 0.18f;
+    float controlHpx = (float)winSize.y * controlHeightFrac;
+
+    // map mouse to control view coordinates
+    bool mousePressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    sf::Vector2f mouseInControl = win->mapPixelToCoords(mousePos, this->controlView);
+
+    // button rect in control view coords (matches render)
+    sf::FloatRect toggleBtnRect(10.f, 10.f, 140.f, controlHpx - 20.f);
+    if (mousePressed && !this->wasMousePressed) {
+        if (toggleBtnRect.contains(mouseInControl)) {
+            this->showPlanetNames = !this->showPlanetNames;
+            std::cout << "ShowPlanetNames toggled: " << this->showPlanetNames << std::endl;
+        }
+    }
+    this->wasMousePressed = mousePressed;
+
     sf::Vector2f mousePosF = this->vGame->getMainWindow()->mapPixelToCoords(mousePos);
-    std::cout << "x:" << mousePosF.x << "y:" << mousePosF.y << "\n";
+    std::cout << "x:" << mousePosF.x << " y:" << mousePosF.y << "\n";
 }
 
 void GameState::render(sf::RenderTarget *target)
 {
     //std::cout << "GameState:Render" << std::endl;
 
-    this->mainView.reset(sf::FloatRect(0,0,2048,1400));
-    this->mWorldBounds = sf::FloatRect(0.f,0.f,this->mainView.getSize().x,2000.f);
+    // Recompute layout fractions and sizes for responsive layout
+    sf::RenderWindow* win = this->vGame->getMainWindow();
     
+
+    
+    this->renderMainView(win);
+    this->renderInfoView(win);
+    // --- Control view (bottom) ---
+    //float controlHpx = (float)winSize.y * controlHeightFrac;
+    this->renderControlView(win);
+    
+}
+
+
+void GameState::renderMainView(sf::RenderWindow* win){
+    sf::Vector2u winSize = win->getSize();
+    float infoWidthFrac = 0.22f;
+    float controlHeightFrac = 0.18f;
+
+    // --- Main view (center) ---
+    this->mainView.reset(sf::FloatRect(0.f, 0.f, 2048.f, 1400.f));
+    this->mainView.setViewport(sf::FloatRect(infoWidthFrac, 0.f, 1.f - infoWidthFrac, 1.f - controlHeightFrac));
+
     texture.setRepeated(true);
     sf::Sprite sprite;
     sprite.setTexture(texture);
+    this->mWorldBounds = sf::FloatRect(0.f, 0.f, this->mainView.getSize().x, 2000.f);
     sf::IntRect textureRect(mWorldBounds);
     sprite.setTextureRect(textureRect);
     sprite.setPosition(0.f, 0.f);
 
-    this->vGame->getMainWindow()->clear();
-    this->vGame->getMainWindow()->setView(this->mainView);
+    // draw main world
+    win->setView(this->mainView);
+    win->draw(sprite);
+    win->draw(this->top_left_icon);
+    win->draw(this->top_right_icon);
+    win->draw(this->bottom_right_icon);
+    win->draw(this->bottom_left_icon);
 
-    // Draw the textured sprite
-    this->vGame->getMainWindow()->draw(sprite);
-    //this->vGame->getMainWindow()->display();
-    //this->view.rotate(45);
-    //this->view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
-    this->mainView.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
-    
+    // If toggled, draw a list of planet names in the main view
+    if (this->showPlanetNames) {
+        win->setView(this->mainView);
+        std::vector<Planet*> planets = this->vGame->getGameEngine()->getGameObjs()->getPlanets();
+        float sx = 10.f;
+        float sy = 10.f;
+        const float lineH = 18.f;
+        if (this->fontLoaded) {
+            for (size_t i = 0; i < planets.size(); ++i) {
+                sf::Text t(planets[i]->getName(), this->font, 14);
+                t.setFillColor(sf::Color::White);
+                t.setPosition(sx, sy + i * lineH);
+                win->draw(t);
+            }
+        } else {
+            // fallback: print to console
+            for (size_t i = 0; i < planets.size(); ++i) {
+                std::cout << "Planet: " << planets[i]->getName() << std::endl;
+            }
+        }
+    }
+}
 
-    //paint the 4 corners
-    //move the view port to be around the mouse
-    this->vGame->getMainWindow()->draw(this->top_left_icon);
-    this->vGame->getMainWindow()->draw(this->top_right_icon);
-    this->vGame->getMainWindow()->draw(this->bottom_right_icon);
-    this->vGame->getMainWindow()->draw(this->bottom_left_icon);
+void GameState::renderInfoView(sf::RenderWindow* win){
+    sf::Vector2u winSize = win->getSize();
+    float infoWidthFrac = 0.22f;
+    float controlHeightFrac = 0.18f;
+    // --- Info view (left column) ---
+    float infoWpx = (float)winSize.x * infoWidthFrac;
+    float infoHpx = (float)winSize.y * (1.f - controlHeightFrac);
+    this->infoView.reset(sf::FloatRect(0.f, 0.f, infoWpx, infoHpx));
+    this->infoView.setViewport(sf::FloatRect(0.f, 0.f, infoWidthFrac, 1.f - controlHeightFrac));
 
-    this->miniView.reset(sf::FloatRect(-3,3,100,100));
-    this->vGame->getMainWindow()->setView(this->miniView);
-    //TODO:draw the background
-    sf::RectangleShape minibkg;
-    minibkg.setFillColor(sf::Color::Blue);
-    minibkg.setPosition(0,0);
-    minibkg.setSize(sf::Vector2f(100, 100));
+    win->setView(this->infoView);
+    // background for info pane
+    sf::RectangleShape infoBg;
+    infoBg.setFillColor(sf::Color(40, 40, 48));
+    infoBg.setSize(sf::Vector2f(infoWpx, infoHpx));
+    infoBg.setPosition(0.f, 0.f);
+    win->draw(infoBg);
 
+    // (cycle display removed)
 
-    this->vGame->getMainWindow()->draw(minibkg);
-    this->miniView.setViewport(sf::FloatRect(0.f, 0.75f, 0.25f, 0.25f));
-    this->vGame->getMainWindow()->draw(this->top_left_icon);
+    // placeholder: simple bars / panels in info pane
+    sf::RectangleShape panel1(sf::Vector2f(infoWpx - 20.f, 80.f));
+    panel1.setPosition(10.f, 10.f);
+    panel1.setFillColor(sf::Color(70, 70, 90));
+    win->draw(panel1);
+
+    sf::RectangleShape panel2(sf::Vector2f(infoWpx - 20.f, 80.f));
+    panel2.setPosition(10.f, 100.f);
+    panel2.setFillColor(sf::Color(70, 70, 90));
+    win->draw(panel2);
 
 }
+
+void GameState::renderControlView(sf::RenderWindow* win){
+    sf::Vector2u winSize = win->getSize();
+    float controlHeightFrac = 0.18f;
+    float controlHpx = (float)winSize.y * controlHeightFrac;
+    this->controlView.reset(sf::FloatRect(0.f, 0.f, (float)winSize.x, controlHpx));
+    this->controlView.setViewport(sf::FloatRect(0.f, 1.f - controlHeightFrac, 1.f, controlHeightFrac));
+
+    win->setView(this->controlView);
+
+    sf::RectangleShape controlBg;
+    controlBg.setFillColor(sf::Color(28, 28, 32));
+    controlBg.setSize(sf::Vector2f((float)winSize.x, controlHpx));
+    controlBg.setPosition(0.f, 0.f);
+    win->draw(controlBg);
+
+    // placeholder buttons
+    float bx = 10.f;
+    // toggle button for showing planet names
+    sf::RectangleShape toggleBtn(sf::Vector2f(140.f, controlHpx - 20.f));
+    toggleBtn.setPosition(10.f, 10.f);
+    if (this->showPlanetNames) {
+        toggleBtn.setFillColor(sf::Color(80, 160, 80));
+    } else {
+        toggleBtn.setFillColor(sf::Color(100, 100, 120));
+    }
+    win->draw(toggleBtn);
+
+    if (this->fontLoaded) {
+        sf::Text tbText(this->showPlanetNames ? "Hide Planets" : "Show Planets", this->font, 16);
+        tbText.setFillColor(sf::Color::White);
+        tbText.setPosition(14.f, 14.f);
+        win->draw(tbText);
+    }
+}
+
+
 
 GameState::~GameState()
 {
