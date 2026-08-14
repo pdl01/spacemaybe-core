@@ -28,6 +28,15 @@ float Coordinate::findDistanceBetween(Coordinate _y) {
     return distance;
 }
 
+int Coordinate::getX() {
+    return this->x;
+}
+int Coordinate::getY() {
+    return this->y;
+}
+int Coordinate::getZ() {
+    return this->z;
+}
 
 
 

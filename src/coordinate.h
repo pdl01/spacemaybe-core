@@ -7,7 +7,9 @@ class Coordinate {
     Coordinate();
     Coordinate(int x, int y, int z,std::string coordinateSet);
     float findDistanceBetween(Coordinate y);
-    
+    int getX();
+    int getY();
+    int getZ();
 
     
  protected:

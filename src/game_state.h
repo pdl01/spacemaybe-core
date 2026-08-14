@@ -14,9 +14,7 @@ class GameState : public State {
 
     void update(const float& dt);
 	void render(sf::RenderTarget* target = NULL);
-    void renderControlView(sf::RenderWindow* win);
-    void renderInfoView(sf::RenderWindow* win);
-    void renderMainView(sf::RenderWindow* win);
+   
 
 
 private:
@@ -24,7 +22,10 @@ private:
     sf::View mainView;
     sf::View controlView;
     sf::View infoView;
-    bool showPlanetNames;
+    bool showFriendlyPlanets;
+    bool showNeutralPlanets;
+    bool showEnemyPlanets;
+
     bool fontLoaded;
     bool wasMousePressed;
     sf::Font font;
@@ -38,5 +39,10 @@ private:
     sf::CircleShape bottom_left_icon;
     int gsCycle;
     int incrementGECycleAfterGSCcycle;
+
+    void renderControlView(sf::RenderWindow* win);
+    void renderInfoView(sf::RenderWindow* win);
+    void renderMainView(sf::RenderWindow* win);
+    
 };
 #endif
