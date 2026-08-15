@@ -144,6 +144,7 @@ void GameState::render(sf::RenderTarget *target)
     // --- Control view (bottom) ---
     // float controlHpx = (float)winSize.y * controlHeightFrac;
     this->renderControlView(win);
+    //TODO: need to create instance vars for all the controls/ui elements
 }
 
 void GameState::renderMainView(sf::RenderWindow *win)
